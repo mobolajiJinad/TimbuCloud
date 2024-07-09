@@ -88,7 +88,7 @@ const Checkout = () => {
 
           {cartCount > 0 && (
             <button
-              className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-2 py-1 text-white"
+              className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
               onClick={() => clearCart()}
             >
               <img src={WhiteCart} alt="" className="mr-2" />
@@ -159,7 +159,7 @@ const Checkout = () => {
           <NavHashLink
             smooth
             to="/#featuredProducts"
-            className="my-5 mt-10 rounded-xl bg-dark-cyan px-3 py-1 text-white"
+            className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}
           >
             Back to shop

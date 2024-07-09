@@ -38,7 +38,7 @@ const ProductsContainer = ({ products }) => {
           </span>
 
           <button
-            className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-base font-medium text-white sm:px-3"
+            className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-sm font-medium text-white sm:px-3"
             onClick={() => addToCart(product)}
           >
             Add to cart

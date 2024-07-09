@@ -27,7 +27,7 @@ const Header = () => {
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-dark-cyan">
             <img src={TimbuCloud} alt="Timbu cloud logo" />
           </div>
-          <h1 className="ml-2 text-lg font-semibold text-dark-cyan">
+          <h1 className="ml-2 text-base font-semibold text-dark-cyan">
             Timbu Cloud
           </h1>
         </div>

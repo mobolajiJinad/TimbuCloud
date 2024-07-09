@@ -54,7 +54,7 @@ const Category = () => {
 
       <a
         href="#"
-        className="ml-auto mt-7 block w-20 rounded-xl bg-dark-cyan p-2 text-sm text-white sm:hidden"
+        className="ml-auto mt-7 block w-20 rounded-xl bg-dark-cyan p-2 text-xs text-white sm:hidden"
       >
         See more
       </a>
