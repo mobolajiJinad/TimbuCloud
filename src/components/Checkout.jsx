@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NavHashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 import { CartContext } from "./CartContext";
 
@@ -26,115 +26,115 @@ const Checkout = () => {
 
   return (
     <>
-      <NavHashLink
-        smooth
-        to="/"
-        className="absolute left-7 top-6 text-base font-medium text-dark-cyan"
-      >
-        Back
-      </NavHashLink>
-
       <main className="mt-16 px-2 pb-9">
         <h1 className="my-5 text-center text-2xl font-bold">Checkout</h1>
 
-        <div className="">
-          <div className="grid grid-cols-4 items-center gap-2 text-base font-semibold text-black">
-            <span></span>
-            <span>Item</span>
-            <span>Quantity</span>
-            <span>Price</span>
-          </div>
+        <div className="w-full justify-between px-2 md:px-[3%] lg:flex lg:px-[5%]">
+          <div className="mx-auto w-full lg:w-2/3">
+            <div className="flex items-center justify-between text-base font-semibold text-black">
+              <span className="hidden w-16 sm:block"></span>
+              <span className="w-5/12">Item</span>
+              <span className="w-2/12">Quantity</span>
+              <span className="w-4/12 pl-4">Price</span>
+            </div>
 
-          {cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="my-2 grid grid-cols-4 items-center gap-2"
-            >
-              <img src={item.image} alt={item.name} className="h-16 w-16" />
-
-              <div className="flex flex-col">
-                <h2 className="my-3 text-base font-semibold">{item.name}</h2>
-                <span className="text-xs font-semibold">Display: 5 Inches</span>
-                <span className="text-xs font-semibold">Color: Black</span>
-                <span className="text-xs font-semibold">Memory: 32GB</span>
-              </div>
-
-              <div className="flex items-center justify-center">
-                <input
-                  type="number"
-                  min="1"
-                  value={item.quantity}
-                  onChange={(e) =>
-                    updateQuantity(item.id, parseInt(e.target.value))
-                  }
-                  className="w-11 border p-2 text-center"
-                />
-              </div>
-
-              <div className="flex items-center justify-end">
-                <span className="text-lg">
-                  ${(item.price * (item.quantity || 0)).toFixed(2)}
-                </span>
-
+            {cartItems.map((item) => (
+              <div
+                key={item.id}
+                className="my-2 flex items-center justify-between"
+              >
                 <img
-                  src={ClearCart}
-                  className="ml-3 cursor-pointer"
-                  onClick={() => removeFromCart(item.id)}
-                  alt="Remove item"
+                  src={item.image}
+                  alt={item.name}
+                  className="hidden h-16 w-16 sm:block"
                 />
+
+                <div className="flex w-5/12 flex-col">
+                  <h2 className="my-3 text-base font-semibold">{item.name}</h2>
+                  <span className="text-xs font-semibold">
+                    Display: 5 Inches
+                  </span>
+                  <span className="text-xs font-semibold">Color: Black</span>
+                  <span className="text-xs font-semibold">Memory: 32GB</span>
+                </div>
+
+                <div className="flex w-2/12 items-center">
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) =>
+                      updateQuantity(item.id, parseInt(e.target.value))
+                    }
+                    className="w-11 border p-2 text-center"
+                  />
+                </div>
+
+                <div className="flex w-4/12 items-center">
+                  <span className="text-lg">
+                    ${(item.price * (item.quantity || 0)).toFixed(2)}
+                  </span>
+
+                  <img
+                    src={ClearCart}
+                    className="ml-3 cursor-pointer"
+                    onClick={() => removeFromCart(item.id)}
+                    alt="Remove item"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {cartCount > 0 && (
-            <button
-              className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
-              onClick={() => clearCart()}
-            >
-              <img src={WhiteCart} alt="" className="mr-2" />
-              Clear Cart
-            </button>
-          )}
-        </div>
-
-        <div className="mx-auto my-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
-          <h4 className="my-4 text-center text-sm font-bold capitalize">
-            order summary
-          </h4>
-
-          <div className="w-full">
-            <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
-              <h5>subtotal</h5>
-              <p>${totalPrice.toFixed(2)}</p>
-            </div>
-            <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
-              <h5>discount</h5>
-              <p>$0</p>
-            </div>
-            <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
-              <h5>shipping</h5>
-              <p>$0</p>
-            </div>
-            <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
-              <h5>total</h5>
-              <p>${totalPrice.toFixed(2)}</p>
-            </div>
+            {cartCount > 0 && (
+              <button
+                className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
+                onClick={() => clearCart()}
+              >
+                <img src={WhiteCart} alt="" className="mr-2" />
+                Clear Cart
+              </button>
+            )}
           </div>
 
-          <button
-            className="mx-auto mt-5 rounded-2xl bg-dark-cyan px-4 py-1 text-sm font-medium text-white"
-            onClick={checkoutFunc}
-          >
-            Checkout
-          </button>
+          <div className="mx-auto my-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
+            <h4 className="my-4 text-center text-sm font-bold capitalize">
+              order summary
+            </h4>
+
+            <div className="w-full">
+              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+                <h5>subtotal</h5>
+                <p>${totalPrice.toFixed(2)}</p>
+              </div>
+              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+                <h5>discount</h5>
+                <p>$0</p>
+              </div>
+              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+                <h5>shipping</h5>
+                <p>$0</p>
+              </div>
+              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+                <h5>total</h5>
+                <p>${totalPrice.toFixed(2)}</p>
+              </div>
+            </div>
+
+            <button
+              className="mx-auto mt-5 rounded-2xl bg-dark-cyan px-4 py-1 text-sm font-medium text-white"
+              onClick={checkoutFunc}
+            >
+              Checkout
+            </button>
+          </div>
         </div>
 
-        <NavHashLink
+        <Link
           to="/#FeaturedProducts"
-          className="block text-center text-base font-medium capitalize text-dark-cyan"
+          className="block text-center text-base font-medium capitalize text-dark-cyan md:hidden"
         >
           continue shopping
-        </NavHashLink>
+        </Link>
       </main>
 
       {checkout && (
@@ -156,14 +156,14 @@ const Checkout = () => {
             Congratulations
           </h4>
           <p className="my-3 text-black">Checkout successful</p>
-          <NavHashLink
+          <Link
             smooth
             to="/#featuredProducts"
             className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}
           >
             Back to shop
-          </NavHashLink>
+          </Link>
         </div>
       )}
     </>

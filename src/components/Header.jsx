@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 import { CartContext } from "./CartContext";
 
@@ -7,7 +8,6 @@ import TimbuCloud from "../assets/TimbuCloud.svg";
 import Cart from "../assets/Cart.svg";
 import MenuClosed from "../assets/MenuClosed.svg";
 import MenuOpen from "../assets/MenuOpen.svg";
-import Notifications from "../assets/Notifications.svg";
 
 const navLinks = [
   { name: "home", link: "/" },
@@ -33,12 +33,12 @@ const Header = () => {
         </div>
 
         <div className="flex w-1/4 items-center justify-around sm:hidden">
-          <NavHashLink smooth to="checkout" className="relative">
+          <Link smooth to="/checkout" className="relative">
             <span className="absolute bottom-5 left-7 text-base font-semibold text-red-600">
               {cartCount}
             </span>
             <img src={Cart} alt="" className="w-full cursor-pointer" />
-          </NavHashLink>
+          </Link>
           <div
             className="cursor-pointer"
             onClick={() => setMenu((prevState) => !prevState)}
@@ -57,22 +57,23 @@ const Header = () => {
               smooth
               key={index}
               to={navLink.link}
-              className="mx-3 text-xl font-semibold capitalize text-dark-cyan md:mx-4"
+              className="mr-4 text-xl font-semibold capitalize text-dark-cyan md:mx-4"
             >
               {navLink.name}
             </NavHashLink>
           ))}
         </div>
 
-        <div className="hidden w-1/6 items-center justify-around sm:flex">
-          <img src={Notifications} alt="" className="cursor-pointer" />
-          <NavHashLink smooth to="checkout" className="relative">
-            <span className="absolute bottom-5 left-7 text-base font-semibold text-red-600">
-              {cartCount}
-            </span>
-            <img src={Cart} alt="" className="w-full cursor-pointer" />
-          </NavHashLink>
-        </div>
+        <Link
+          smooth
+          to="/checkout"
+          className="relative hidden w-1/12 text-center sm:block"
+        >
+          <span className="absolute bottom-5 left-7 text-base font-semibold text-red-600">
+            {cartCount}
+          </span>
+          <img src={Cart} alt="" className="cursor-pointer" />
+        </Link>
       </header>
 
       <div

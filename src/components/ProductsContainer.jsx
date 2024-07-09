@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "./CartContext";
 
@@ -6,6 +7,7 @@ import Star from "../assets/Star.svg";
 import Hearts from "../assets/Hearts.svg";
 
 const ProductsContainer = ({ products }) => {
+  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
 
   return (
@@ -21,7 +23,12 @@ const ProductsContainer = ({ products }) => {
             className="relative left-14 top-2 sm:left-14 sm:top-2"
           />
 
-          <img src={product.image} alt="" className="h-auto w-20 sm:w-14" />
+          <img
+            src={product.image}
+            alt=""
+            className="h-auto w-20 sm:w-14"
+            onClick={() => navigate(`/${product.id}`)}
+          />
 
           <div className="my-1 flex">
             {Array.from({ length: product.star }, (_, index) => (
@@ -29,7 +36,7 @@ const ProductsContainer = ({ products }) => {
             ))}
           </div>
 
-          <h4 className="my-2 text-xs font-semibold text-black sm:text-base">
+          <h4 className="my-2 text-center text-xs font-semibold text-black sm:text-base">
             {product.name}
           </h4>
 
