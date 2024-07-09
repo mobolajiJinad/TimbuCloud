@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
 import { CartProvider } from "./components/CartContext.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import Notification from "./components/Notification.jsx";
 
 import "./index.css";
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <CartProvider>
+    <Notification />
     <RouterProvider router={router} />
   </CartProvider>,
 );

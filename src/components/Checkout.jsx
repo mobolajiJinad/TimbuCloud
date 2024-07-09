@@ -26,17 +26,19 @@ const Checkout = () => {
 
   return (
     <>
-      <main className="mt-16 px-2 pb-9">
+      <main className="mt-16 px-1 pb-9 md:px-[3%] lg:px-[5%]">
         <h1 className="my-5 text-center text-2xl font-bold">Checkout</h1>
 
-        <div className="w-full justify-between px-2 md:px-[3%] lg:flex lg:px-[5%]">
+        <div className="w-full justify-between lg:flex">
           <div className="mx-auto w-full lg:w-2/3">
-            <div className="flex items-center justify-between text-base font-semibold text-black">
-              <span className="hidden w-64 sm:block"></span>
-              <span className="w-4/12">Item</span>
-              <span className="w-1/12">Quantity</span>
-              <span className="w-3/12 pl-4">Price</span>
-            </div>
+            {cartCount > 0 && (
+              <div className="flex items-center justify-between text-base font-semibold text-black">
+                <span className="w-24"></span>
+                <span className="w-3/12 sm:w-4/12">Item</span>
+                <span className="w-3/12 sm:w-1/12">Quantity</span>
+                <span className="w-2/12 sm:w-3/12">Price</span>
+              </div>
+            )}
 
             {cartItems.map((item) => (
               <div
@@ -46,7 +48,7 @@ const Checkout = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="hidden h-36 w-36 sm:block"
+                  className="block h-24 w-24"
                 />
 
                 <div className="flex w-4/12 flex-col">
@@ -96,37 +98,45 @@ const Checkout = () => {
             )}
           </div>
 
-          <div className="mx-auto my-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
-            <h4 className="my-7 text-center text-sm font-bold capitalize">
-              order summary
-            </h4>
+          {cartCount === 0 && (
+            <h2 className="my-9 text-center text-2xl font-semibold">
+              Cart is empty
+            </h2>
+          )}
 
-            <div className="w-full">
-              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
-                <h5>subtotal</h5>
-                <p>${totalPrice.toFixed(2)}</p>
+          {cartCount > 0 && (
+            <div className="mx-auto my-5 flex w-56 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
+              <h4 className="my-7 text-center text-base font-bold capitalize">
+                order summary
+              </h4>
+
+              <div className="w-full">
+                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
+                  <h5>subtotal</h5>
+                  <p>${totalPrice.toFixed(2)}</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
+                  <h5>discount</h5>
+                  <p>$0</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
+                  <h5>shipping</h5>
+                  <p>$0</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
+                  <h5>total</h5>
+                  <p>${totalPrice.toFixed(2)}</p>
+                </div>
               </div>
-              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
-                <h5>discount</h5>
-                <p>$0</p>
-              </div>
-              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
-                <h5>shipping</h5>
-                <p>$0</p>
-              </div>
-              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
-                <h5>total</h5>
-                <p>${totalPrice.toFixed(2)}</p>
-              </div>
+
+              <button
+                className="mx-auto mt-7 rounded-2xl bg-dark-cyan px-4 py-1 text-base font-medium text-white"
+                onClick={checkoutFunc}
+              >
+                Checkout
+              </button>
             </div>
-
-            <button
-              className="mx-auto mt-7 rounded-2xl bg-dark-cyan px-4 py-1 text-sm font-medium text-white"
-              onClick={checkoutFunc}
-            >
-              Checkout
-            </button>
-          </div>
+          )}
         </div>
 
         <Link

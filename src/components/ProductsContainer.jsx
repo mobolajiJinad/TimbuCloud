@@ -14,13 +14,13 @@ const ProductsContainer = ({ products }) => {
     <>
       {products.map((product) => (
         <div
-          className="m-2 flex w-44 flex-col items-center rounded-3xl border border-[#D9D9D9] p-5"
+          className="m-2 flex w-32 flex-col items-center rounded-3xl border border-[#D9D9D9] px-2 py-5 md:w-36"
           key={product.id}
         >
           <img
             src={Hearts}
             alt=""
-            className="relative left-14 top-2 sm:left-14 sm:top-2"
+            className="relative bottom-2 left-10 sm:top-2"
           />
 
           <img
@@ -45,7 +45,7 @@ const ProductsContainer = ({ products }) => {
           </span>
 
           <button
-            className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-sm font-medium text-white sm:px-3"
+            className="my-2 rounded-xl bg-dark-cyan p-3 px-2 text-sm font-medium text-white sm:px-3"
             onClick={() => addToCart({ ...product, quantity: 1 })}
           >
             Add to cart

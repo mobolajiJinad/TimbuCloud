@@ -5,10 +5,19 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [notification, setNotification] = useState({ message: "", color: "" });
 
   useEffect(() => {
     setCartCount(cartItems.reduce((count, item) => count + item.quantity, 0));
   }, [cartItems]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotification({ message: "", color: "" });
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [notification]);
 
   const addToCart = (product) => {
     const existingItem = cartItems.find((item) => item.id === product.id);
@@ -23,16 +32,28 @@ export const CartProvider = ({ children }) => {
     } else {
       setCartItems([...cartItems, { ...product, quantity: product.quantity }]);
     }
+    setNotification({
+      message: "Item added to cart",
+      color: "text-green-500",
+    });
   };
 
   const removeFromCart = (productId) => {
     setCartItems((prevCart) =>
       prevCart.filter((item) => item.id !== productId),
     );
+    setNotification({
+      message: "Item removed from cart",
+      color: "text-red-500",
+    });
   };
 
   const clearCart = () => {
     setCartItems([]);
+    setNotification({
+      message: "Cart cleared",
+      color: "text-red-500",
+    });
   };
 
   const updateQuantity = (productId, quantity) => {
@@ -50,6 +71,10 @@ export const CartProvider = ({ children }) => {
     0,
   );
 
+  const closeNotification = () => {
+    setNotification({ message: "", color: "" });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -60,6 +85,8 @@ export const CartProvider = ({ children }) => {
         clearCart,
         updateQuantity,
         totalPrice,
+        notification,
+        closeNotification,
       }}
     >
       {children}
