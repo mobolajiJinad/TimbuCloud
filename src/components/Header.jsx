@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex items-center justify-between bg-header-gradient px-2 py-4 md:py-7">
+      <header className="flex items-center justify-between bg-[#CDEFE9] px-2 py-4 shadow-md md:py-7">
         <div className="flex w-1/2 items-center sm:w-1/4 md:ml-7">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-dark-cyan">
             <img src={TimbuCloud} alt="Timbu cloud logo" />
