@@ -9,8 +9,14 @@ import CheckoutSuccessful from "../assets/CheckoutSuccessful.svg";
 import MenuOpen from "../assets/MenuOpen.svg";
 
 const Checkout = () => {
-  const { cartItems, updateQuantity, removeFromCart, clearCart, totalPrice } =
-    useContext(CartContext);
+  const {
+    cartItems,
+    updateQuantity,
+    cartCount,
+    removeFromCart,
+    clearCart,
+    totalPrice,
+  } = useContext(CartContext);
   const [checkout, setCheckout] = useState(false);
 
   const checkoutFunc = () => {
@@ -23,13 +29,13 @@ const Checkout = () => {
       <NavHashLink
         smooth
         to="/"
-        className="text-base font-medium text-dark-cyan"
+        className="absolute left-7 top-6 text-base font-medium text-dark-cyan"
       >
-        back
+        Back
       </NavHashLink>
 
-      <main className="mt-9 px-2 pb-9">
-        <h1 className="mb-5 text-center text-2xl font-bold">Checkout</h1>
+      <main className="mt-16 px-2 pb-9">
+        <h1 className="my-5 text-center text-2xl font-bold">Checkout</h1>
 
         <div className="">
           <div className="grid grid-cols-4 items-center gap-2 text-base font-semibold text-black">
@@ -80,16 +86,18 @@ const Checkout = () => {
             </div>
           ))}
 
-          <button
-            className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-2 py-1 text-white"
-            onClick={() => clearCart()}
-          >
-            <img src={WhiteCart} alt="" className="mr-2" />
-            Clear Cart
-          </button>
+          {cartCount > 0 && (
+            <button
+              className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-2 py-1 text-white"
+              onClick={() => clearCart()}
+            >
+              <img src={WhiteCart} alt="" className="mr-2" />
+              Clear Cart
+            </button>
+          )}
         </div>
 
-        <div className="mx-auto mb-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
+        <div className="mx-auto my-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
           <h4 className="my-4 text-center text-sm font-bold capitalize">
             order summary
           </h4>
