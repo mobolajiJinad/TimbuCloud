@@ -8,7 +8,7 @@ const Notification = () => {
   if (!notification.message) return null;
 
   return (
-    <div className="fixed left-1/2 top-0 flex w-full max-w-52 -translate-x-1/2 items-center justify-between rounded-xl bg-white p-3 text-center shadow-md">
+    <div className="fixed left-1/2 top-2 z-50 flex w-full max-w-60 -translate-x-1/2 items-center justify-center rounded-xl bg-white p-3 py-5 text-center shadow-md">
       <p className={`${notification.color}`}>{notification.message}</p>
       <button
         onClick={closeNotification}

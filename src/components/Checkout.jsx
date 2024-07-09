@@ -48,16 +48,22 @@ const Checkout = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="block h-24 w-24"
+                  className="block h-20 w-20 sm:h-24 sm:w-24"
                 />
 
                 <div className="flex w-4/12 flex-col">
-                  <h2 className="my-3 text-base font-semibold">{item.name}</h2>
-                  <span className="text-xs font-semibold">
+                  <h2 className="my-3 text-sm font-semibold sm:text-base">
+                    {item.name}
+                  </h2>
+                  <span className="text-[10px] font-semibold sm:text-xs">
                     Display: 5 Inches
                   </span>
-                  <span className="text-xs font-semibold">Color: Black</span>
-                  <span className="text-xs font-semibold">Memory: 32GB</span>
+                  <span className="text-[10px] font-semibold sm:text-xs">
+                    Color: Black
+                  </span>
+                  <span className="text-[10px] font-semibold sm:text-xs">
+                    Memory: 32GB
+                  </span>
                 </div>
 
                 <div className="flex w-1/12 items-center">
@@ -68,18 +74,18 @@ const Checkout = () => {
                     onChange={(e) =>
                       updateQuantity(item.id, parseInt(e.target.value))
                     }
-                    className="w-11 border p-2 text-center"
+                    className="w-9 border text-center sm:w-11 sm:p-2"
                   />
                 </div>
 
                 <div className="flex w-3/12 items-center">
-                  <span className="text-lg">
+                  <span className="text-base sm:text-lg">
                     ${(item.price * (item.quantity || 0)).toFixed(2)}
                   </span>
 
                   <img
                     src={ClearCart}
-                    className="ml-3 cursor-pointer"
+                    className="ml-2 cursor-pointer sm:ml-3"
                     onClick={() => removeFromCart(item.id)}
                     alt="Remove item"
                   />
@@ -105,7 +111,7 @@ const Checkout = () => {
           )}
 
           {cartCount > 0 && (
-            <div className="mx-auto my-5 flex w-56 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
+            <div className="mx-auto my-5 flex w-60 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
               <h4 className="my-7 text-center text-base font-bold capitalize">
                 order summary
               </h4>

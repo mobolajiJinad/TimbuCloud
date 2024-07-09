@@ -76,14 +76,14 @@ const Header = () => {
       </header>
 
       <div
-        className={`absolute ${menuOpen ? "right-0" : "right-full"} top-[70px] w-3/5 max-w-64 rounded-br-3xl rounded-tl-3xl border border-white bg-white px-5 shadow-lg transition-all duration-200 ease-in sm:hidden`}
+        className={`absolute ${menuOpen ? "right-0" : "right-full"} top-[70px] w-3/5 max-w-60 rounded-br-3xl rounded-tl-3xl border border-white bg-white px-5 shadow-lg transition-all duration-200 ease-in sm:hidden`}
       >
         {navLinks.map((navLink, index) => (
           <NavHashLink
             smooth
             key={index}
             to={navLink.link}
-            className="my-7 block text-2xl font-semibold capitalize text-dark-cyan"
+            className="my-7 block text-xl font-semibold capitalize text-dark-cyan"
           >
             {navLink.name}
           </NavHashLink>
