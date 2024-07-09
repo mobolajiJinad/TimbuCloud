@@ -17,14 +17,9 @@ const Main = () => {
           <h3 className="mb-4 text-xl font-bold text-dark-cyan sm:text-left sm:text-opaque-white">
             T5 Mini Smart watch
           </h3>
-          <p className="hidden whitespace-normal break-words text-lg font-semibold text-opaque-white sm:block">
+          <p className="whitespace-normal break-words text-lg font-semibold text-opaque-white">
             Stay connected and healthy with our latest smartwatch! Track your
             workouts, and receive notifications on the go.
-          </p>
-          <p className="block whitespace-normal break-words text-lg font-semibold text-opaque-white sm:hidden">
-            Stay Connected, Stay <span className="text-black">Fit</span>, Stay
-            Stylish with <span className="text-dark-cyan">Timbu Cloud</span>{" "}
-            Smart watches.
           </p>
 
           <NavHashLink

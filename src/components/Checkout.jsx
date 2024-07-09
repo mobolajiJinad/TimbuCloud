@@ -32,10 +32,10 @@ const Checkout = () => {
         <div className="w-full justify-between px-2 md:px-[3%] lg:flex lg:px-[5%]">
           <div className="mx-auto w-full lg:w-2/3">
             <div className="flex items-center justify-between text-base font-semibold text-black">
-              <span className="hidden w-16 sm:block"></span>
-              <span className="w-5/12">Item</span>
-              <span className="w-2/12">Quantity</span>
-              <span className="w-4/12 pl-4">Price</span>
+              <span className="hidden w-64 sm:block"></span>
+              <span className="w-4/12">Item</span>
+              <span className="w-1/12">Quantity</span>
+              <span className="w-3/12 pl-4">Price</span>
             </div>
 
             {cartItems.map((item) => (
@@ -46,10 +46,10 @@ const Checkout = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="hidden h-16 w-16 sm:block"
+                  className="hidden h-36 w-36 sm:block"
                 />
 
-                <div className="flex w-5/12 flex-col">
+                <div className="flex w-4/12 flex-col">
                   <h2 className="my-3 text-base font-semibold">{item.name}</h2>
                   <span className="text-xs font-semibold">
                     Display: 5 Inches
@@ -58,7 +58,7 @@ const Checkout = () => {
                   <span className="text-xs font-semibold">Memory: 32GB</span>
                 </div>
 
-                <div className="flex w-2/12 items-center">
+                <div className="flex w-1/12 items-center">
                   <input
                     type="number"
                     min="1"
@@ -70,7 +70,7 @@ const Checkout = () => {
                   />
                 </div>
 
-                <div className="flex w-4/12 items-center">
+                <div className="flex w-3/12 items-center">
                   <span className="text-lg">
                     ${(item.price * (item.quantity || 0)).toFixed(2)}
                   </span>
@@ -97,31 +97,31 @@ const Checkout = () => {
           </div>
 
           <div className="mx-auto my-5 flex w-52 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
-            <h4 className="my-4 text-center text-sm font-bold capitalize">
+            <h4 className="my-7 text-center text-sm font-bold capitalize">
               order summary
             </h4>
 
             <div className="w-full">
-              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
                 <h5>subtotal</h5>
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
-              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
                 <h5>discount</h5>
                 <p>$0</p>
               </div>
-              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
                 <h5>shipping</h5>
                 <p>$0</p>
               </div>
-              <div className="mt-1 flex items-center justify-between border-b border-b-black py-2 text-xs capitalize">
+              <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-xs capitalize">
                 <h5>total</h5>
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
             </div>
 
             <button
-              className="mx-auto mt-5 rounded-2xl bg-dark-cyan px-4 py-1 text-sm font-medium text-white"
+              className="mx-auto mt-7 rounded-2xl bg-dark-cyan px-4 py-1 text-sm font-medium text-white"
               onClick={checkoutFunc}
             >
               Checkout
@@ -157,7 +157,7 @@ const Checkout = () => {
           </h4>
           <p className="my-3 text-black">Checkout successful</p>
           <Link
-            to="/#featuredProducts"
+            to="/#FeaturedProducts"
             className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}
           >

@@ -46,7 +46,7 @@ const ProductsContainer = ({ products }) => {
 
           <button
             className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-sm font-medium text-white sm:px-3"
-            onClick={() => addToCart(product)}
+            onClick={() => addToCart({ ...product, quantity: 1 })}
           >
             Add to cart
           </button>

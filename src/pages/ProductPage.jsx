@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { CartContext } from "../components/CartContext";
@@ -7,15 +7,24 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const ProductPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); // For some reason, entering this page scrolls to the bottom automatically
+
   const { productPageID } = useParams();
-  const { addToCart, updateQuantity, cartItems } = useContext(CartContext);
+  const { addToCart, cartItems } = useContext(CartContext);
 
   const product = products.find((item) => item.id == productPageID);
   const cartItem = cartItems.find((item) => item.id == productPageID);
-  const quantity = cartItem ? cartItem.quantity : 0;
+  const [quantity, setQuantity] = useState(cartItem ? cartItem.quantity : 1);
+
+  const handleAddToCart = () => {
+    const updatedProduct = { ...product, quantity };
+    addToCart(updatedProduct);
+  };
 
   return (
-    <>
+    <div>
       <Header />
 
       <main>
@@ -47,30 +56,28 @@ const ProductPage = () => {
           </p>
 
           <div className="my-3 flex items-center justify-between">
-            <h4 className="text-2xl font-medium">${product.price}</h4>
+            <h4 className="text-2xl font-medium">
+              ${product.price * quantity}
+            </h4>
 
             <div>
-              <button onClick={() => updateQuantity(product.id, quantity + 1)}>
-                +
-              </button>
+              <button onClick={() => setQuantity(quantity + 1)}>+</button>
               <span className="mx-4 border px-2 py-1">{quantity}</span>
-              <button onClick={() => updateQuantity(product.id, quantity - 1)}>
-                -
-              </button>
+              <button onClick={() => setQuantity(quantity - 1)}>-</button>
             </div>
           </div>
         </div>
 
         <button
           className="my-2 ml-auto mr-4 block rounded-xl bg-dark-cyan px-5 py-2 text-sm font-medium text-white sm:px-3"
-          onClick={() => addToCart(product)}
+          onClick={handleAddToCart}
         >
           Add to cart
         </button>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
