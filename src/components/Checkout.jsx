@@ -157,7 +157,6 @@ const Checkout = () => {
           </h4>
           <p className="my-3 text-black">Checkout successful</p>
           <Link
-            smooth
             to="/#featuredProducts"
             className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}

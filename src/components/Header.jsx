@@ -33,7 +33,7 @@ const Header = () => {
         </div>
 
         <div className="flex w-1/4 items-center justify-around sm:hidden">
-          <Link smooth to="/checkout" className="relative">
+          <Link to="/checkout" className="relative">
             <span className="absolute bottom-5 left-7 text-base font-semibold text-red-600">
               {cartCount}
             </span>
@@ -65,7 +65,6 @@ const Header = () => {
         </div>
 
         <Link
-          smooth
           to="/checkout"
           className="relative hidden w-1/12 text-center sm:block"
         >
