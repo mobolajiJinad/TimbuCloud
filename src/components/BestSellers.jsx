@@ -1,41 +1,40 @@
 import ProductsContainer from "./ProductsContainer";
 
 import BestSellersLogo from "../assets/BestSellersLogo.svg";
-import StandardWashingMachine from "../assets/StandardWashingMachine.png";
-import ProSmartWatch from "../assets/ProSmartWatch.png";
-import IPhone15ProMax from "../assets/IPhone15ProMax.png";
-import GarminWatch from "../assets/GarminWatch.png";
-import Ipad from "../assets/Ipad.png";
-import ThreeDSecurityCamera from "../assets/ThreeDSecurityCamera.png";
 
 const bestSellers = [
   {
+    id: 1,
     name: "I20 Pro Smart watch",
-    image: ProSmartWatch,
+    image: "/images/ProSmartWatch.png",
     price: "150.00",
     star: 5,
   },
   {
+    id: 2,
     name: "Iphone 13 pro max",
-    image: IPhone15ProMax,
+    image: "/images/IPhone15ProMax.png",
     price: "1500.00",
     star: 5,
   },
   {
+    id: 3,
     name: "Garmin Watch",
-    image: GarminWatch,
+    image: "/images/GarminWatch.png",
     price: "300.00",
     star: 4,
   },
   {
+    id: 4,
     name: "Ipad",
-    image: Ipad,
+    image: "/images/Ipad.png",
     price: "900.00",
     star: 5,
   },
   {
+    id: 5,
     name: "3D security camera",
-    image: ThreeDSecurityCamera,
+    image: "/images/ThreeDSecurityCamera.png",
     price: "600.00",
     star: 5,
   },
@@ -50,7 +49,7 @@ const BestSellers = () => {
             <h2 className="mb-4 text-lg text-[#000000B2] sm:text-4xl">
               Best Sellers
             </h2>
-            <p className="w-52 whitespace-normal break-words text-xs font-normal sm:text-sm">
+            <p className="w-52 whitespace-normal break-words text-xs font-normal sm:text-sm md:w-60">
               Take a look at our top-selling product of the week!
             </p>
           </div>
@@ -60,13 +59,13 @@ const BestSellers = () => {
           </button>
         </div>
 
-        <img src={BestSellersLogo} alt="" className="w-11 sm:h-60 sm:w-60" />
+        <img src={BestSellersLogo} alt="" className="w-11 sm:h-56 sm:w-56" />
       </section>
 
       <section className="flex flex-wrap items-center justify-between px-[3%]">
         <div className="m-2 flex w-full flex-col items-center p-5 sm:w-44">
           <img
-            src={StandardWashingMachine}
+            src="/images/StandardWashingMachine.png"
             alt=""
             className="h-28 w-36 sm:h-60 sm:w-64"
           />
@@ -84,7 +83,9 @@ const BestSellers = () => {
           </button>
         </div>
 
-        <ProductsContainer products={bestSellers} />
+        <div className="flex flex-wrap items-center justify-around">
+          <ProductsContainer products={bestSellers} />
+        </div>
       </section>
     </>
   );

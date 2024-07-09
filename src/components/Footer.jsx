@@ -2,7 +2,7 @@ import SendBtn from "../assets/SendBtn.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-cyan mt-3 flex flex-col items-center px-[5%] py-5 capitalize text-white sm:flex-row sm:flex-wrap sm:justify-evenly">
+    <footer className="mt-3 flex flex-col items-center bg-dark-cyan px-[5%] py-5 capitalize text-white sm:flex-row sm:flex-wrap sm:justify-evenly">
       <div className="text-center">
         <h4 className="my-2 text-lg font-bold">about</h4>
         <ul className="text-sm font-medium">
@@ -54,7 +54,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="text-center">
+      <div id="contacts" className="text-center">
         <h4 className="my-2 text-lg font-bold">newsletter</h4>
         <p className="text-sm font-medium">
           Subscribe to Timbu Cloud Newsletter below

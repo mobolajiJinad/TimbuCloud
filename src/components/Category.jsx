@@ -1,40 +1,34 @@
-import Headphones from "../assets/Headphones.png";
-import Earpods from "../assets/Earpods.png";
-import Watches from "../assets/Watches.png";
-import Camera from "../assets/Camera.png";
-import Phones from "../assets/Phones.png";
-
 const visibleCategories = [
   {
     name: "Headphones",
-    image: Headphones,
+    image: "/images/Headphones.png",
   },
   {
     name: "Ear pods",
-    image: Earpods,
+    image: "/images/Earpods.png",
   },
   {
     name: "Watches",
-    image: Watches,
+    image: "/images/Watches.png",
   },
   {
     name: "Camera",
-    image: Camera,
+    image: "/images/Camera.png",
   },
   {
     name: "Phones",
-    image: Phones,
+    image: "/images/Phones.png",
   },
 ];
 
 const Category = () => {
   return (
-    <section className="bg-white px-[5%] py-5 sm:bg-[#CDEFE933]">
-      <h2 className="text-opaque-white mb-4 flex items-center justify-between py-4 text-xl font-semibold sm:text-4xl">
+    <section id="category" className="bg-white px-[5%] py-5 sm:bg-[#CDEFE933]">
+      <h2 className="mb-4 flex items-center justify-between py-4 text-xl font-semibold text-opaque-white sm:text-4xl">
         Browse by categories{" "}
         <a
           href="#"
-          className="bg-dark-cyan hidden rounded-xl p-2 text-sm text-white sm:block"
+          className="hidden rounded-xl bg-dark-cyan p-2 text-sm text-white sm:block"
         >
           See more
         </a>
@@ -60,7 +54,7 @@ const Category = () => {
 
       <a
         href="#"
-        className="bg-dark-cyan ml-auto mt-7 block w-20 rounded-xl p-2 text-sm text-white sm:hidden"
+        className="ml-auto mt-7 block w-20 rounded-xl bg-dark-cyan p-2 text-sm text-white sm:hidden"
       >
         See more
       </a>

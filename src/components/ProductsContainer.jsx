@@ -1,19 +1,26 @@
+import { useContext } from "react";
+
+import { CartContext } from "./CartContext";
+
 import Star from "../assets/Star.svg";
 import Hearts from "../assets/Hearts.svg";
 
 const ProductsContainer = ({ products }) => {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <>
-      {products.map((product, index) => (
+      {products.map((product) => (
         <div
-          className="m-2 flex w-full flex-col items-center rounded-3xl border border-[#D9D9D9] p-5 sm:w-44"
-          key={index}
+          className="m-2 flex w-44 flex-col items-center rounded-3xl border border-[#D9D9D9] p-5"
+          key={product.id}
         >
           <img
             src={Hearts}
             alt=""
-            className="relative left-[5.5rem] top-2 sm:left-14 sm:top-2"
+            className="relative left-14 top-2 sm:left-14 sm:top-2"
           />
+
           <img src={product.image} alt="" className="h-auto w-20 sm:w-14" />
 
           <div className="my-1 flex">
@@ -30,7 +37,10 @@ const ProductsContainer = ({ products }) => {
             ${product.price}
           </span>
 
-          <button className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-base font-medium text-white sm:px-3">
+          <button
+            className="my-2 rounded-xl bg-dark-cyan p-3 px-6 text-base font-medium text-white sm:px-3"
+            onClick={() => addToCart(product)}
+          >
             Add to cart
           </button>
         </div>
