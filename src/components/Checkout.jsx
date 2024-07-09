@@ -55,15 +55,6 @@ const Checkout = () => {
                   <h2 className="my-3 text-sm font-semibold sm:text-base">
                     {item.name}
                   </h2>
-                  <span className="text-[10px] font-semibold sm:text-xs">
-                    Display: 5 Inches
-                  </span>
-                  <span className="text-[10px] font-semibold sm:text-xs">
-                    Color: Black
-                  </span>
-                  <span className="text-[10px] font-semibold sm:text-xs">
-                    Memory: 32GB
-                  </span>
                 </div>
 
                 <div className="flex w-1/12 items-center">
