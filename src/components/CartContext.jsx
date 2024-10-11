@@ -21,17 +21,21 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     const existingItem = cartItems.find((item) => item.id === product.id);
+
     if (existingItem) {
+      // Update quantity by adding product.quantity to the existing item's quantity
       setCartItems(
         cartItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: product.quantity + 1 }
+            ? { ...item, quantity: item.quantity + product.quantity }
             : item,
         ),
       );
     } else {
+      // Add the product with the initial quantity
       setCartItems([...cartItems, { ...product, quantity: product.quantity }]);
     }
+
     setNotification({
       message: "Item added to cart",
       color: "text-green-500",
