@@ -25,7 +25,7 @@ const BestSellers = () => {
         <img src={BestSellersLogo} alt="" className="w-11 sm:h-56 sm:w-56" />
       </section>
 
-      <section className="flex flex-wrap items-center justify-around px-[3%]">
+      <section className="grid grid-cols-1 gap-6 px-[3%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         <ProductsContainer products={bestSellers} />
       </section>
     </>

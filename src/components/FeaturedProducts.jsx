@@ -1,11 +1,10 @@
 import ProductsContainer from "./ProductsContainer";
-
 import { featuredProducts } from "../data";
 
 const FeaturedProducts = () => {
   return (
-    <section id="FeaturedProducts" className="bg-white px-[5%] pt-12">
-      <h2 className="mb-4 flex items-center justify-between py-4 text-xl font-semibold text-opaque-white sm:text-4xl">
+    <section id="FeaturedProducts" className="bg-white px-[3%] pt-12">
+      <h2 className="mb-6 flex items-center justify-between py-4 text-xl font-semibold text-gray-900 sm:text-3xl">
         Featured Products
         <a
           href="#"
@@ -15,7 +14,7 @@ const FeaturedProducts = () => {
         </a>
       </h2>
 
-      <div className="flex flex-wrap items-center justify-around">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         <ProductsContainer products={featuredProducts} />
       </div>
 

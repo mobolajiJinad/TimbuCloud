@@ -14,7 +14,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotification({ message: "", color: "" });
-    }, 2500);
+    }, 2_000);
 
     return () => clearTimeout(timer);
   }, [notification]);
