@@ -33,10 +33,10 @@ const Checkout = () => {
           <div className="mx-auto w-full lg:w-2/3">
             {cartCount > 0 && (
               <div className="flex items-center justify-between text-base font-semibold text-black">
-                <span className="w-24"></span>
-                <span className="w-3/12 sm:w-4/12">Item</span>
-                <span className="w-3/12 sm:w-1/12">Quantity</span>
-                <span className="w-2/12 sm:w-3/12">Price</span>
+                <span className="w-20"></span>
+                <span className="w-3/12 sm:w-3/12">Item</span>
+                <span className="w-5/12 sm:w-2/12">Quantity</span>
+                <span className="w-4/12 sm:w-4/12">Price</span>
               </div>
             )}
 
@@ -48,16 +48,16 @@ const Checkout = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="block h-20 w-20 sm:h-24 sm:w-24"
+                  className="block h-16 w-16 sm:h-24 sm:w-24"
                 />
 
-                <div className="flex w-4/12 flex-col">
+                <div className="flex w-3/12 flex-col">
                   <h2 className="my-3 text-sm font-semibold sm:text-base">
                     {item.name}
                   </h2>
                 </div>
 
-                <div className="flex w-1/12 items-center">
+                <div className="flex w-2/12 items-center">
                   <input
                     type="number"
                     min="1"
@@ -69,7 +69,7 @@ const Checkout = () => {
                   />
                 </div>
 
-                <div className="flex w-3/12 items-center">
+                <div className="flex w-4/12 items-center">
                   <span className="text-base sm:text-lg">
                     ${(item.price * (item.quantity || 0)).toFixed(2)}
                   </span>
