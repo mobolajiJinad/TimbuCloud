@@ -84,7 +84,7 @@ export const products = [
     id: 10,
     name: "Smart TV",
     image: "/images/BestSellersTV.png",
-    price: "1500:00",
+    price: "1500.00",
     star: 5,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -93,7 +93,7 @@ export const products = [
     id: 11,
     name: "Ring Light",
     image: "/images/RingLight.png",
-    price: "100:00",
+    price: "100.00",
     star: 4,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -102,7 +102,7 @@ export const products = [
     id: 12,
     name: "Wireless Ear Buds",
     image: "/images/WirelessEarBuds.png",
-    price: "500:00",
+    price: "500.00",
     star: 5,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -111,7 +111,7 @@ export const products = [
     id: 13,
     name: "CCTV Camera",
     image: "/images/CCTV.png",
-    price: "300:00",
+    price: "300.00",
     star: 3,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -204,7 +204,7 @@ export const featuredProducts = [
     id: 10,
     name: "Smart TV",
     image: "/images/BestSellersTV.png",
-    price: "1500:00",
+    price: "1500.00",
     star: 5,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -213,7 +213,7 @@ export const featuredProducts = [
     id: 11,
     name: "Ring Light",
     image: "/images/RingLight.png",
-    price: "100:00",
+    price: "100.00",
     star: 4,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -222,7 +222,7 @@ export const featuredProducts = [
     id: 12,
     name: "Wireless Ear Buds",
     image: "/images/WirelessEarBuds.png",
-    price: "500:00",
+    price: "500.00",
     star: 5,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
@@ -273,7 +273,7 @@ export const bestSellers = [
     id: 13,
     name: "CCTV Camera",
     image: "/images/CCTV.png",
-    price: "300:00",
+    price: "300.00",
     star: 3,
     details:
       "Elevate your lifestyle with the Y20 Smartwatch, the perfect blend of style, functionality, and advanced technology.",
