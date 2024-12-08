@@ -1,67 +1,50 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+
+interface CartItem {
+  id: number;
+  image: string;
+  name: string;
+  star: number;
+  price: number;
+  quantity: number;
+  details: string;
+}
+
+interface Notification {
+  message: string;
+  color: string;
+}
 
 interface CartContextType {
   cartCount: number;
-  cartItems: {
-    id: number;
-    image: string;
-    name: string;
-    star: number;
-    price: string;
-    quantity: number;
-    details: string;
-  }[];
-  addToCart: (product: {
-    id: number;
-    name: string;
-    image: string;
-    price: string;
-    star: number;
-    details: string;
-    quantity: number;
-  }) => void;
+  cartItems: CartItem[];
+  addToCart: (product: CartItem) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   updateQuantity: (id: number, quantity: number) => void;
   totalPrice: number;
-  notification: { message: string; color: string };
+  notification: Notification;
   closeNotification: () => void;
+  setNotification: (notification: Notification) => void;
 }
 
-// Initialize CartContext with a default value
-export const CartContext = createContext({
-  cartItems: [],
-  cartCount: 0,
-  addToCart: (product: {
-    id: number;
-    name: string;
-    image: string;
-    price: string;
-    star: number;
-    details: string;
-    quantity: number;
-  }) => {},
-  removeFromCart: () => {},
-  clearCart: () => {},
-  updateQuantity: (productId: number, quantity: number) => {},
-  totalPrice: 0,
-  notification: { message: "", color: "" },
-  closeNotification: () => {},
-});
+export const CartContext = createContext<Partial<CartContextType>>({});
 
-export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [notification, setNotification] = useState({ message: "", color: "" });
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartCount, setCartCount] = useState<number>(0);
+  const [notification, setNotification] = useState<Notification>({
+    message: "",
+    color: "",
+  });
 
-  // Recalculate the cart count whenever cartItems change
   useEffect(() => {
-    setCartCount(cartItems.reduce((count, item) => count + item.quantity, 0));
+    const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    setCartCount(count);
   }, [cartItems]);
 
-  // Automatically clear notifications after 2 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotification({ message: "", color: "" });
@@ -70,19 +53,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     return () => clearTimeout(timer); // Cleanup timer
   }, [notification]);
 
-  const addToCart = (product) => {
+  const addToCart = (product: CartItem) => {
     setCartItems((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // Update quantity for existing item
         return prevCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + product.quantity }
             : item
         );
       } else {
-        // Add new item to cart
         return [...prevCart, { ...product, quantity: product.quantity }];
       }
     });
@@ -93,7 +74,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId: number) => {
     setCartItems((prevCart) =>
       prevCart.filter((item) => item.id !== productId)
     );
@@ -111,7 +92,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const updateQuantity = (productId, quantity) => {
+  const updateQuantity = (productId: number, quantity: number) => {
     setCartItems((prevCart) =>
       prevCart.map((item) =>
         item.id === productId
@@ -142,6 +123,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         totalPrice,
         notification,
         closeNotification,
+        setNotification,
       }}
     >
       {children}

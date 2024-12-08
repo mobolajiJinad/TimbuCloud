@@ -29,7 +29,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
             </p>
 
             <Link
-              href="/featuredProducts"
+              href="/products"
               className="mt-8 inline-block rounded-3xl bg-dark-cyan px-5 py-2 text-lg capitalize text-white sm:mx-0"
             >
               explore products

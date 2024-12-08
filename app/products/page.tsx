@@ -1,7 +1,9 @@
+"use client";
+
 import ProductsContainer from "@/app/components/ProductsContainer";
 import { products } from "@/app/data";
 
-const page = () => {
+export default function Page() {
   return (
     <section className="bg-white px-[3%] mt-6">
       <h2 className="mb-6 flex items-center justify-between py-4 text-xl font-semibold text-gray-900 sm:text-3xl">
@@ -26,6 +28,4 @@ const page = () => {
       </a>
     </section>
   );
-};
-
-export default page;
+}

@@ -9,18 +9,16 @@ import { CartContext } from "@/app/providers/CartProvider";
 import Hearts from "@/app/assets/Hearts.svg";
 import Star from "@/app/assets/Star.svg";
 
-const ProductsContainer = ({
-  products,
-}: {
-  products: {
-    id: number;
-    image: string;
-    name: string;
-    star: number;
-    price: string;
-    details: string;
-  }[];
-}) => {
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  star: number;
+  price: number;
+  details: string;
+}
+
+const ProductsContainer = ({ products }: { products: Product[] }) => {
   const { addToCart } = useContext(CartContext);
   const router = useRouter();
 
@@ -43,7 +41,7 @@ const ProductsContainer = ({
             width={100}
             height={100}
             className="h-40 w-40 object-contain sm:h-36 sm:w-36"
-            onClick={() => router.push(`/product/${product.id}`)}
+            onClick={() => router.push(`/products/${product.id}`)}
           />
 
           <div className="my-2 flex">
@@ -52,7 +50,7 @@ const ProductsContainer = ({
             ))}
           </div>
 
-          <div onClick={() => router.push(`/${product.id}`)}>
+          <div onClick={() => router.push(`products/${product.id}`)}>
             <h4 className="my-2 text-center text-sm font-semibold text-gray-800 sm:text-lg">
               {product.name}
             </h4>
@@ -64,7 +62,12 @@ const ProductsContainer = ({
 
           <button
             className="my-2 rounded-xl bg-dark-cyan p-3 text-sm font-medium text-white transition-colors hover:bg-cyan-700 sm:px-4"
-            onClick={() => addToCart({ ...product, quantity: 1 })}
+            onClick={() =>
+              addToCart?.({
+                ...product,
+                quantity: 1,
+              })
+            }
           >
             Add to cart
           </button>

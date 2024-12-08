@@ -11,7 +11,7 @@ import ClearCart from "@/app/assets/ClearCart.svg";
 import CheckoutSuccessful from "@/app/assets/CheckoutSuccessful.svg";
 import MenuOpen from "@/app/assets/MenuOpen.svg";
 
-const page = () => {
+export default function Page() {
   const {
     cartItems,
     updateQuantity,
@@ -21,6 +21,15 @@ const page = () => {
     totalPrice,
   } = useContext(CartContext);
   const [checkout, setCheckout] = useState(false);
+
+  if (
+    !clearCart ||
+    !updateQuantity ||
+    !removeFromCart ||
+    !cartCount ||
+    !totalPrice
+  )
+    return null;
 
   const checkoutFunc = () => {
     setCheckout(true);
@@ -43,7 +52,7 @@ const page = () => {
               </div>
             )}
 
-            {cartItems.map((item) => (
+            {cartItems?.map((item) => (
               <div
                 key={item.id}
                 className="my-2 flex items-center justify-between"
@@ -113,7 +122,7 @@ const page = () => {
               <div className="w-full">
                 <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
                   <h5>subtotal</h5>
-                  <p>${totalPrice.toFixed(2)}</p>
+                  <p>${totalPrice?.toFixed(2)}</p>
                 </div>
                 <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
                   <h5>discount</h5>
@@ -125,7 +134,7 @@ const page = () => {
                 </div>
                 <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
                   <h5>total</h5>
-                  <p>${totalPrice.toFixed(2)}</p>
+                  <p>${totalPrice?.toFixed(2)}</p>
                 </div>
               </div>
 
@@ -140,7 +149,7 @@ const page = () => {
         </div>
 
         <Link
-          href="/featuredProducts"
+          href="/products"
           className="block text-center text-base font-medium capitalize text-dark-cyan md:hidden"
         >
           continue shopping
@@ -167,7 +176,7 @@ const page = () => {
           </h4>
           <p className="my-3 text-black">Checkout successful</p>
           <Link
-            href="/featuredProducts"
+            href="/products"
             className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}
           >
@@ -177,6 +186,4 @@ const page = () => {
       )}
     </>
   );
-};
-
-export default page;
+}
