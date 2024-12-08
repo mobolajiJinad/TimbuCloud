@@ -26,7 +26,7 @@ const ProductsContainer = ({ products }: { products: Product[] }) => {
     <>
       {products.map((product) => (
         <div
-          className="flex w-full max-w-xs flex-col items-center rounded-3xl border border-gray-300 p-4 shadow-lg transition-transform hover:scale-105 sm:max-w-sm"
+          className="flex w-full flex-col items-center rounded-3xl border border-gray-300 p-4 shadow-lg transition-transform hover:scale-105 cursor-pointer sm:max-w-sm"
           key={product.id}
         >
           <Image
@@ -40,7 +40,7 @@ const ProductsContainer = ({ products }: { products: Product[] }) => {
             alt={product.name}
             width={100}
             height={100}
-            className="h-40 w-40 object-contain sm:h-36 sm:w-36"
+            className="h-40 w-40 object-contain xsm:h-36 xsm:w-36"
             onClick={() => router.push(`/products/${product.id}`)}
           />
 
@@ -55,7 +55,7 @@ const ProductsContainer = ({ products }: { products: Product[] }) => {
               {product.name}
             </h4>
 
-            <span className="my-1 text-sm font-semibold text-gray-600 sm:text-lg">
+            <span className="my-1 text-center block text-sm font-semibold text-gray-600 sm:text-lg">
               ${product.price}
             </span>
           </div>
