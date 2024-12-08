@@ -1,21 +1,23 @@
-import ProductsContainer from "./ProductsContainer";
-import { featuredProducts } from "../data";
+"use client";
 
-const FeaturedProducts = () => {
+import ProductsContainer from "@/app/components/ProductsContainer";
+import { products } from "@/app/data";
+
+export default function Page() {
   return (
-    <section id="FeaturedProducts" className="bg-white px-[3%] pt-12">
+    <section className="bg-white px-[3%] mt-6">
       <h2 className="mb-6 flex items-center justify-between py-4 text-xl font-semibold text-gray-900 sm:text-3xl">
         Featured Products
         <a
           href="#"
-          className="hidden rounded-xl bg-dark-cyan p-2 text-sm text-white sm:block"
+          className="hidden rounded-xl bg-dark-cyan p-3 text-sm text-white sm:block"
         >
           See more
         </a>
       </h2>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        <ProductsContainer products={featuredProducts} />
+        <ProductsContainer products={products} />
       </div>
 
       <a
@@ -26,6 +28,4 @@ const FeaturedProducts = () => {
       </a>
     </section>
   );
-};
-
-export default FeaturedProducts;
+}
