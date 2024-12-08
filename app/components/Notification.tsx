@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
-import { CartContext } from "./CartContext";
+"use client";
+
+import { useContext } from "react";
+import { CartContext } from "@/app/providers/CartProvider";
 
 const Notification = () => {
   const { notification, closeNotification } = useContext(CartContext);

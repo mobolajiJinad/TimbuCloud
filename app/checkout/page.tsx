@@ -1,14 +1,17 @@
+"use client";
+
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 
-import { CartContext } from "./CartContext";
+import { CartContext } from "@/app/providers/CartProvider";
 
-import WhiteCart from "../assets/WhiteCart.svg";
-import ClearCart from "../assets/ClearCart.svg";
-import CheckoutSuccessful from "../assets/CheckoutSuccessful.svg";
-import MenuOpen from "../assets/MenuOpen.svg";
+import WhiteCart from "@/app/assets/WhiteCart.svg";
+import ClearCart from "@/app/assets/ClearCart.svg";
+import CheckoutSuccessful from "@/app/assets/CheckoutSuccessful.svg";
+import MenuOpen from "@/app/assets/MenuOpen.svg";
 
-const Checkout = () => {
+const page = () => {
   const {
     cartItems,
     updateQuantity,
@@ -74,7 +77,7 @@ const Checkout = () => {
                     ${(item.price * (item.quantity || 0)).toFixed(2)}
                   </span>
 
-                  <img
+                  <Image
                     src={ClearCart}
                     className="ml-2 cursor-pointer sm:ml-3"
                     onClick={() => removeFromCart(item.id)}
@@ -89,7 +92,7 @@ const Checkout = () => {
                 className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
                 onClick={() => clearCart()}
               >
-                <img src={WhiteCart} alt="" className="mr-2" />
+                <Image src={WhiteCart} alt="" className="mr-2" />
                 Clear Cart
               </button>
             )}
@@ -137,7 +140,7 @@ const Checkout = () => {
         </div>
 
         <Link
-          to="/#FeaturedProducts"
+          href="/featuredProducts"
           className="block text-center text-base font-medium capitalize text-dark-cyan md:hidden"
         >
           continue shopping
@@ -146,14 +149,14 @@ const Checkout = () => {
 
       {checkout && (
         <div className="fixed left-1/2 top-1/2 flex w-4/5 max-w-96 -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-br-xl rounded-tl-xl bg-white p-5 shadow-lg">
-          <img
+          <Image
             src={MenuOpen}
             alt=""
             className="relative right-24 top-3 cursor-pointer"
             onClick={() => setCheckout(false)}
           />
 
-          <img
+          <Image
             src={CheckoutSuccessful}
             alt="Checkout Successful"
             className="mt-4"
@@ -164,7 +167,7 @@ const Checkout = () => {
           </h4>
           <p className="my-3 text-black">Checkout successful</p>
           <Link
-            to="/#FeaturedProducts"
+            href="/featuredProducts"
             className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
             onClick={() => setCheckout(false)}
           >
@@ -176,4 +179,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default page;
