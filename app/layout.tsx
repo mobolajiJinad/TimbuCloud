@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Mono } from "next/font/google";
+import { Noto_Sans_Mono, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
 import { CartProvider } from "@/app/providers/CartProvider";
@@ -8,6 +8,11 @@ import Notification from "@/app/components/Notification";
 import Footer from "@/app/components/Footer";
 
 const NotoSansMono = Noto_Sans_Mono({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const RobotoMono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
 });
@@ -24,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${NotoSansMono.className} antialiased`}>
+      <body
+        className={`${NotoSansMono.className} ${RobotoMono.className} antialiased`}
+      >
         <CartProvider>
           <Notification />
           <Header />

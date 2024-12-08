@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useContext, useState, useEffect } from "react";
+import Image from "next/image";
 
 import { CartContext } from "@/app/providers/CartProvider";
 import { products } from "@/app/data";
@@ -24,7 +25,6 @@ export default function Page({ params }: { params: { id: number } }) {
 
   const productPageID = Number(params.id);
 
-  products.map((item: Product) => console.log(typeof item.id));
   const product = products.find((item: Product) => item.id === productPageID);
 
   const cartItem = cartItems?.find(
@@ -65,7 +65,9 @@ export default function Page({ params }: { params: { id: number } }) {
       )}
 
       <div className="flex items-center justify-center bg-[#CDEFE933] pb-9 pt-12">
-        <img
+        <Image
+          width={224}
+          height={224}
           src={product?.image || ""}
           alt={product?.name || "Unavailable"}
           className="h-56 w-56 rounded-full border bg-black"

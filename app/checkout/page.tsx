@@ -57,7 +57,9 @@ export default function Page() {
                 key={item.id}
                 className="my-2 flex items-center justify-between"
               >
-                <img
+                <Image
+                  width={64}
+                  height={64}
                   src={item.image}
                   alt={item.name}
                   className="block h-16 w-16 sm:h-24 sm:w-24"

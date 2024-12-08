@@ -5,7 +5,7 @@ import Support from "@/app/components/Support";
 
 import T5MiniSmartWatch from "@/app/assets/T5MiniSmartWatch.png";
 
-export default function Home({ children }: { children: React.ReactNode }) {
+export default function Home() {
   return (
     <>
       <main className="pb-4">
@@ -37,8 +37,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </main>
-
-      {children}
 
       <Support />
     </>
