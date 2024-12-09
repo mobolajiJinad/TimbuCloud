@@ -56,7 +56,7 @@ const ProductsContainer = ({ products }: { products: Product[] }) => {
             </h4>
 
             <span className="my-1 text-center block text-sm font-semibold text-gray-600 sm:text-lg">
-              ${product.price}
+              {product.price} ETH
             </span>
           </div>
 
