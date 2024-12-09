@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono, Roboto_Mono } from "next/font/google";
+import "@rainbow-me/rainbowkit/styles.css";
 import "./globals.css";
 
 import { CartProvider } from "@/app/providers/CartProvider";

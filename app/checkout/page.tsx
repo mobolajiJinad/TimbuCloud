@@ -68,7 +68,7 @@ export default function Page() {
 
                 <div className="flex w-4/12 items-center">
                   <span className="text-base sm:text-lg">
-                    ${(item.price * (item.quantity || 0)).toFixed(2)}
+                    {(item.price * (item.quantity || 0)).toFixed(4)} ETH
                   </span>
 
                   <Image
@@ -83,14 +83,18 @@ export default function Page() {
 
             <div className="mt-8 flex flex-col items-center space-y-4">
               <button
-                className="flex w-full max-w-xs items-center justify-center rounded-xl bg-dark-cyan px-3 py-1.5 text-white"
+                className="flex w-full max-w-xs items-center justify-center rounded-xl bg-dark-cyan px-3 py-3 text-white"
                 onClick={() => clearCart?.()}
               >
-                <Image src={WhiteCart} alt="Clear Cart" className="mr-2" />
-                Clear Cart
+                <Image
+                  src={WhiteCart}
+                  alt="Clear Cart"
+                  className="mr-2 h-6 w-6"
+                />
+                Clear
               </button>
               <button
-                className="w-full max-w-xs rounded-xl bg-dark-cyan px-3 py-1.5 text-base font-medium text-white"
+                className="w-full max-w-xs rounded-xl bg-dark-cyan px-3 py-2 text-base font-medium text-white"
                 onClick={() => router.push("/checkout/4lefr403c")}
               >
                 Checkout
