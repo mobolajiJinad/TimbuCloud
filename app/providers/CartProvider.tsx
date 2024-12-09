@@ -6,10 +6,8 @@ interface CartItem {
   id: number;
   image: string;
   name: string;
-  star: number;
   price: number;
   quantity: number;
-  details: string;
 }
 
 interface Notification {
@@ -30,11 +28,26 @@ interface CartContextType {
   setNotification: (notification: Notification) => void;
 }
 
-export const CartContext = createContext<Partial<CartContextType>>({});
+const defaultContext: Partial<CartContextType> = {
+  cartItems: [],
+  cartCount: 0,
+  totalPrice: 0,
+  addToCart: () => {},
+  removeFromCart: () => {},
+  clearCart: () => {},
+  updateQuantity: () => {},
+  notification: { message: "", color: "" },
+  closeNotification: () => {},
+  setNotification: () => {},
+};
+
+export const CartContext =
+  createContext<Partial<CartContextType>>(defaultContext);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartCount, setCartCount] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [notification, setNotification] = useState<Notification>({
     message: "",
     color: "",
@@ -42,42 +55,42 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
     setCartCount(count);
+    setTotalPrice(total);
   }, [cartItems]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotification({ message: "", color: "" });
-    }, 2000);
+    if (notification.message) {
+      const timer = setTimeout(() => {
+        closeNotification();
+      }, 2000);
 
-    return () => clearTimeout(timer); // Cleanup timer
+      return () => clearTimeout(timer); // Cleanup timer
+    }
   }, [notification]);
 
   const addToCart = (product: CartItem) => {
-    setCartItems((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-
+    setCartItems((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
       if (existingItem) {
-        return prevCart.map((item) =>
+        return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + product.quantity }
             : item
         );
-      } else {
-        return [...prevCart, { ...product, quantity: product.quantity }];
       }
+      return [...prev, product];
     });
-
-    setNotification({
-      message: "Item added to cart",
-      color: "text-green-500",
-    });
+    setNotification({ message: "Item added to cart", color: "text-green-500" });
   };
 
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevCart) =>
-      prevCart.filter((item) => item.id !== productId)
-    );
+  const removeFromCart = (id: number) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
     setNotification({
       message: "Item removed from cart",
       color: "text-red-500",
@@ -86,26 +99,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    setNotification({
-      message: "Cart cleared",
-      color: "text-red-500",
-    });
+    setNotification({ message: "Cart cleared", color: "text-red-500" });
   };
 
-  const updateQuantity = (productId: number, quantity: number) => {
-    setCartItems((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId
-          ? { ...item, quantity: Math.max(1, quantity) }
-          : item
-      )
+  const updateQuantity = (id: number, quantity: number) => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
   };
-
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
 
   const closeNotification = () => {
     setNotification({ message: "", color: "" });

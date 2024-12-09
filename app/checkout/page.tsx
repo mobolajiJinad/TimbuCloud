@@ -13,27 +13,18 @@ import MenuOpen from "@/app/assets/MenuOpen.svg";
 
 export default function Page() {
   const {
-    cartItems,
+    cartItems = [],
     updateQuantity,
-    cartCount,
+    cartCount = 0,
     removeFromCart,
     clearCart,
-    totalPrice,
+    totalPrice = 0,
   } = useContext(CartContext);
   const [checkout, setCheckout] = useState(false);
 
-  if (
-    !clearCart ||
-    !updateQuantity ||
-    !removeFromCart ||
-    !cartCount ||
-    !totalPrice
-  )
-    return null;
-
   const checkoutFunc = () => {
     setCheckout(true);
-    clearCart();
+    clearCart?.();
   };
 
   return (
@@ -77,7 +68,7 @@ export default function Page() {
                     min="1"
                     value={item.quantity}
                     onChange={(e) =>
-                      updateQuantity(item.id, parseInt(e.target.value))
+                      updateQuantity?.(item.id, parseInt(e.target.value))
                     }
                     className="w-9 border text-center sm:w-11 sm:p-2"
                   />
@@ -91,29 +82,29 @@ export default function Page() {
                   <Image
                     src={ClearCart}
                     className="ml-2 cursor-pointer sm:ml-3"
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart?.(item.id)}
                     alt="Remove item"
                   />
                 </div>
               </div>
             ))}
 
+            {cartCount === 0 && (
+              <h2 className="my-9  text-2xl text-center font-semibold">
+                Cart is empty
+              </h2>
+            )}
+
             {cartCount > 0 && (
               <button
                 className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
-                onClick={() => clearCart()}
+                onClick={() => clearCart?.()}
               >
                 <Image src={WhiteCart} alt="" className="mr-2" />
                 Clear Cart
               </button>
             )}
           </div>
-
-          {cartCount === 0 && (
-            <h2 className="my-9 text-center text-2xl font-semibold">
-              Cart is empty
-            </h2>
-          )}
 
           {cartCount > 0 && (
             <div className="mx-auto my-5 flex w-60 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
@@ -159,10 +150,10 @@ export default function Page() {
       </main>
 
       {checkout && (
-        <div className="fixed left-1/2 top-1/2 flex w-4/5 max-w-96 -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-br-xl rounded-tl-xl bg-white p-5 shadow-lg">
+        <div className="fixed left-1/2 top-1/2 flex z-50 w-4/5 max-w-96 -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-br-xl rounded-tl-xl bg-white p-5 shadow-lg">
           <Image
             src={MenuOpen}
-            alt=""
+            alt="Close Modal"
             className="relative right-24 top-3 cursor-pointer"
             onClick={() => setCheckout(false)}
           />
