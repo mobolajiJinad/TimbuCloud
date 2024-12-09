@@ -1,15 +1,14 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { CartContext } from "@/app/providers/CartProvider";
 
 import WhiteCart from "@/app/assets/WhiteCart.svg";
 import ClearCart from "@/app/assets/ClearCart.svg";
-import CheckoutSuccessful from "@/app/assets/CheckoutSuccessful.svg";
-import MenuOpen from "@/app/assets/MenuOpen.svg";
 
 export default function Page() {
   const {
@@ -18,30 +17,23 @@ export default function Page() {
     cartCount = 0,
     removeFromCart,
     clearCart,
-    totalPrice = 0,
   } = useContext(CartContext);
-  const [checkout, setCheckout] = useState(false);
 
-  const checkoutFunc = () => {
-    setCheckout(true);
-    clearCart?.();
-  };
+  const router = useRouter();
 
   return (
-    <>
-      <main className="mt-16 px-1 pb-9 md:px-[3%] lg:px-[5%]">
-        <h1 className="my-5 text-center text-2xl font-bold">Checkout</h1>
+    <div className="flex min-h-[70vh] items-center justify-center bg-gray-100 px-4">
+      <main className="w-full my-5 max-w-3xl rounded-lg bg-white p-6 shadow-md">
+        <h1 className="mb-6 text-center text-2xl font-bold">Checkout</h1>
 
-        <div className="w-full justify-between lg:flex">
-          <div className="mx-auto w-full lg:w-2/3">
-            {cartCount > 0 && (
-              <div className="flex items-center justify-between text-base font-semibold text-black">
-                <span className="w-20"></span>
-                <span className="w-3/12 sm:w-3/12">Item</span>
-                <span className="w-5/12 sm:w-2/12">Quantity</span>
-                <span className="w-4/12 sm:w-4/12">Price</span>
-              </div>
-            )}
+        {cartCount > 0 ? (
+          <>
+            <div className="mb-4 flex items-center justify-between text-base font-semibold text-black">
+              <span className="w-20"></span>
+              <span className="w-3/12 sm:w-3/12">Item</span>
+              <span className="w-5/12 sm:w-2/12">Quantity</span>
+              <span className="w-4/12 sm:w-4/12">Price</span>
+            </div>
 
             {cartItems?.map((item) => (
               <div
@@ -89,94 +81,35 @@ export default function Page() {
               </div>
             ))}
 
-            {cartCount === 0 && (
-              <h2 className="my-9  text-2xl text-center font-semibold">
-                Cart is empty
-              </h2>
-            )}
-
-            {cartCount > 0 && (
+            <div className="mt-8 flex flex-col items-center space-y-4">
               <button
-                className="my-9 ml-2 flex items-center rounded-xl bg-dark-cyan px-3 py-1 text-white"
+                className="flex w-full max-w-xs items-center justify-center rounded-xl bg-dark-cyan px-3 py-1.5 text-white"
                 onClick={() => clearCart?.()}
               >
-                <Image src={WhiteCart} alt="" className="mr-2" />
+                <Image src={WhiteCart} alt="Clear Cart" className="mr-2" />
                 Clear Cart
               </button>
-            )}
-          </div>
-
-          {cartCount > 0 && (
-            <div className="mx-auto my-5 flex w-60 flex-col items-center rounded-xl bg-[#CDEFE933] px-4 py-7 sm:w-96">
-              <h4 className="my-7 text-center text-base font-bold capitalize">
-                order summary
-              </h4>
-
-              <div className="w-full">
-                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
-                  <h5>subtotal</h5>
-                  <p>${totalPrice?.toFixed(2)}</p>
-                </div>
-                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
-                  <h5>discount</h5>
-                  <p>$0</p>
-                </div>
-                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
-                  <h5>shipping</h5>
-                  <p>$0</p>
-                </div>
-                <div className="mt-2 flex items-center justify-between border-b border-b-black py-3 text-sm capitalize">
-                  <h5>total</h5>
-                  <p>${totalPrice?.toFixed(2)}</p>
-                </div>
-              </div>
-
               <button
-                className="mx-auto mt-7 rounded-2xl bg-dark-cyan px-4 py-1 text-base font-medium text-white"
-                onClick={checkoutFunc}
+                className="w-full max-w-xs rounded-xl bg-dark-cyan px-3 py-1.5 text-base font-medium text-white"
+                onClick={() => router.push("/checkout/4lefr403c")}
               >
                 Checkout
               </button>
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <h2 className="my-9 text-center text-2xl font-semibold">
+            Cart is empty
+          </h2>
+        )}
 
         <Link
           href="/products"
-          className="block text-center text-base font-medium capitalize text-dark-cyan md:hidden"
+          className="mt-6 block text-center text-base font-medium capitalize text-dark-cyan"
         >
           continue shopping
         </Link>
       </main>
-
-      {checkout && (
-        <div className="fixed left-1/2 top-1/2 flex z-50 w-4/5 max-w-96 -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-br-xl rounded-tl-xl bg-white p-5 shadow-lg">
-          <Image
-            src={MenuOpen}
-            alt="Close Modal"
-            className="relative right-24 top-3 cursor-pointer"
-            onClick={() => setCheckout(false)}
-          />
-
-          <Image
-            src={CheckoutSuccessful}
-            alt="Checkout Successful"
-            className="mt-4"
-          />
-
-          <h4 className="mt-4 text-base font-semibold capitalize text-black">
-            Congratulations
-          </h4>
-          <p className="my-3 text-black">Checkout successful</p>
-          <Link
-            href="/products"
-            className="my-5 mt-10 rounded-xl bg-dark-cyan px-4 py-1 text-white"
-            onClick={() => setCheckout(false)}
-          >
-            Back to shop
-          </Link>
-        </div>
-      )}
-    </>
+    </div>
   );
 }

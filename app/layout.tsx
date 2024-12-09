@@ -6,6 +6,7 @@ import { CartProvider } from "@/app/providers/CartProvider";
 import Header from "@/app/components/Header";
 import Notification from "@/app/components/Notification";
 import Footer from "@/app/components/Footer";
+import { WagmiProviderWrapper } from "@/app/providers/WagmiProvider";
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ["latin"],
@@ -32,14 +33,16 @@ export default function RootLayout({
       <body
         className={`${NotoSansMono.className} ${RobotoMono.className} antialiased`}
       >
-        <CartProvider>
-          <Notification />
-          <Header />
+        <WagmiProviderWrapper>
+          <CartProvider>
+            <Notification />
+            <Header />
 
-          {children}
+            {children}
 
-          <Footer />
-        </CartProvider>
+            <Footer />
+          </CartProvider>
+        </WagmiProviderWrapper>
       </body>
     </html>
   );
