@@ -82,56 +82,64 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         closeNotification();
       }, 2000);
 
-      return () => clearTimeout(timer); // Cleanup timer
+      return () => clearTimeout(timer);
     }
   }, [notification]);
 
-  const addToCart = async (product: CartItem) => {
-    setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + product.quantity }
-            : item
-        );
-      }
-      return [...prev, product];
-    });
-
-    // Update the server cookie asynchronously
+  /**
+   * Utility function to handle cart updates and cookie updates
+   */
+  const updateCart = async (
+    newCart: CartItem[],
+    notificationMessage?: Notification
+  ) => {
+    setCartItems(newCart);
     try {
-      await createCartCookie(cartItems);
-      setNotification({
-        message: "Item added to cart",
-        color: "text-green-500",
-      });
+      await createCartCookie(newCart);
+      if (notificationMessage) {
+        setNotification(notificationMessage);
+      }
     } catch (error) {
       console.error("Failed to update cart cookie:", error);
       setNotification({
-        message: "Failed to add item to cart",
+        message: "Failed to update cart",
         color: "text-red-500",
       });
     }
   };
 
+  const addToCart = (product: CartItem) => {
+    const updatedCart = [...cartItems];
+    const existingItem = updatedCart.find((item) => item.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += product.quantity;
+    } else {
+      updatedCart.push(product);
+    }
+
+    updateCart(updatedCart, {
+      message: "Item added to cart",
+      color: "text-green-500",
+    });
+  };
+
   const removeFromCart = (id: number) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-    setNotification({
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    updateCart(updatedCart, {
       message: "Item removed from cart",
       color: "text-red-500",
     });
   };
 
   const clearCart = () => {
-    setCartItems([]);
-    setNotification({ message: "Cart cleared", color: "text-red-500" });
+    updateCart([], { message: "Cart cleared", color: "text-red-500" });
   };
 
   const updateQuantity = (id: number, quantity: number) => {
-    setCartItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity } : item
     );
+    updateCart(updatedCart);
   };
 
   const closeNotification = () => {
