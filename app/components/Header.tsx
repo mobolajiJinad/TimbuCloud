@@ -20,7 +20,7 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 w-full bg-[#CDEFE9] px-[5%] shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-[#CDEFE9] px-[5%] shadow-lg">
       <div className="mx-auto px-4 py-3">
         <div className="grid grid-cols-[1fr_auto_auto] items-center sm:grid-cols-3">
           <div className="flex items-center justify-self-start">
