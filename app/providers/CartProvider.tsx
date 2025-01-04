@@ -2,6 +2,8 @@
 
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 
+import { createCartCookie, getCartItemsCookie } from "@/app/utils/action";
+
 interface CartItem {
   id: number;
   image: string;
@@ -55,6 +57,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
+    const fetchCartItems = async () => {
+      const cartItems = await getCartItemsCookie();
+      setCartItems(cartItems);
+    };
+
+    fetchCartItems();
+  }, []);
+
+  useEffect(() => {
     const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const total = cartItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
@@ -75,7 +86,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [notification]);
 
-  const addToCart = (product: CartItem) => {
+  const addToCart = async (product: CartItem) => {
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.id === product.id);
       if (existingItem) {
@@ -87,7 +98,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
       return [...prev, product];
     });
-    setNotification({ message: "Item added to cart", color: "text-green-500" });
+
+    // Update the server cookie asynchronously
+    try {
+      await createCartCookie(cartItems);
+      setNotification({
+        message: "Item added to cart",
+        color: "text-green-500",
+      });
+    } catch (error) {
+      console.error("Failed to update cart cookie:", error);
+      setNotification({
+        message: "Failed to add item to cart",
+        color: "text-red-500",
+      });
+    }
   };
 
   const removeFromCart = (id: number) => {
