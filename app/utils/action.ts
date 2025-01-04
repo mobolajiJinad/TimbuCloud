@@ -14,7 +14,8 @@ export const createCartCookie = async (
 ) => {
   const cookieStore = await cookies();
 
-  // Serialize and set the cart cookie
+  (await cookies()).delete("cart");
+
   cookieStore.set("cart", JSON.stringify(cart), {
     path: "/", // Make the cookie accessible across the entire site
     sameSite: "strict", // Prevent CSRF attacks
